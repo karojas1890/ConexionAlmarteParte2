@@ -2,15 +2,7 @@ from flask import Flask
 from app.extensions import db
 import os
 
-from app.models import (
-    Usuario, Consultante, PME, Terapeuta, Servicio, Disponibilidad,
-    Cita, MetodoPago, PagoCita, CategoriaRecomendacion,
-    RecomendacionTerapeutica, RecomendacionPaciente,
-    RegistroAplicacionRecomendacion, RecursoApoyo, Emocion,
-    ConductaAfrontamiento, Diario, Tarjeta,Auditoria,RestriccionPassword,Pais,CiudadMunicipio,LocalidadBarrio,EstadoProvincia
-)
 
-from app.Service import email_service,smsservice  
 
 
 
@@ -43,8 +35,6 @@ def create_app():
 
     #  Configuración del servicio de correo
     
-    email_service.init_app(app) 
-    smsservice.init_app(app) 
 
    
 
