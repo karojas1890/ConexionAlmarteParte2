@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña - Almarte</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/codigoRestablecer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+</head>
+<body>
+    <div class="container">
+
+       <!-- Modal de confirmación -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-icon">✅</div>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="logo">AM</div>
+        <h1>Restablecer Credenciales</h1>
+        
+
+        <!-- Sección 1: Verificar código -->
+        <div class="form-section active" id="codeSection">
+            <div class="alert">
+                <div class="alert-text">
+                    Hemos enviado un código de seguridad de 6 dígitos a tu correo electrónico registrado. Por favor, ingrésalo a continuación.
+                </div>
+            </div>
+
+            <div class="error-message" id="codeError">
+                <div class="error-text">El código ingresado es incorrecto. Por favor, verifica e intenta nuevamente.</div>
+            </div>
+
+            <form id="codeForm">
+                <div class="form-group">
+                    <div class="form-group" >
+             <label for="verificationCode">Código de Verificación</label>
+                    <input 
+                        type="text" 
+                        id="verificationCode" 
+                        name="verificationCode" 
+                        class="code-input"
+                        maxlength="6" 
+                        pattern="[0-9]{6}"
+                        placeholder="000000"
+                        required
+                    >
+                </div>
+                </div>
+
+                <button type="submit" class="btn">Verificar Código</button>
+            </form>
+
+            <div class="resend-code">
+                ¿No recibiste el código? <a href="#" class="resend-link" id="resendCode">Reenviar código</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+    const VALIDATECODE_URL = "{{ url_for('crede.ValidateCode') }}";
+     const CODE_URL = "{{ url_for('routes.codigo_restablecer') }}";
+   </script>
+   <script src="{{ url_for('static', filename='js/codeRestablecer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}" > </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2c3e50">
+    <meta property="og:title" content="Conexion by Almarte">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="{{ url_for('static', filename='images/conexion1.png') }}">
+    <meta property="og:type" content="website">
+    <title>Conexión - Iniciar Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/popupStyle.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    
+    <header class="header">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Almarte Logo" class="logo">
+    </header>
+
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <main class="main-content">
+        <div class="login-container">
+            <form method="post" action="{{ url_for('auth.login') }}">
+                <div class="form-group">
+                    <label class="form-label">Usuario <div class="user-icon">👤</div></label>
+                    <input type="text" class="form-input" name="usuario" id="usuario" required>
+                </div>
+
+                <div class="form-group" style="position: relative;">
+                    <label class="form-label">Contraseña <div class="password-icon">🔒</div></label>
+                    <input type="password" class="form-input" name="password" id="password" required>
+                    <i id="togglePassword" class="fa-solid fa-eye" 
+                    style="position: absolute; right: 10px; top: 68%; transform: translateY(-50%); cursor: pointer; color: #555;"></i>
+                </div>
+
+
+                <div class="forgot-password">
+                    <a href="{{ url_for('routes.recuperar_Contra') }}">Restablecer Credenciales</a>
+                </div>
+
+              
+                
+
+                <button type="submit" class="login-btn">
+                    Iniciar sesión <span class="arrow">↪</span>
+                </button>
+
+                <a href="#" class="create-account-btn" style="text-decoration: none;">
+                    Crear cuenta <span class="plus-icon">👤+</span>
+                </a>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <a href="{{ url_for('routes.acerca_de') }}" class="footer-item">
+            <div class="footer-icon">AM</div><span>Más sobre AlmarteCR</span>
+        </a>
+        <a href="{{url_for('routes.search_therapist')}}" class="footer-item">
+            <div class="footer-icon">↪</div><span>Ingreso</span>
+        </a>
+        <a href="#" class="footer-item">
+            <div class="footer-icon">$</div><span>Tipo de cambio del</span>
+        </a>
+    </footer>
+
+    
+
+ 
+   
+
+    <script src="{{ url_for('static', filename='js/PopUp.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+
+
+        
+        .main-content {
+            flex: 1;
+            padding: 30px 20px;
+           
+        }
+
+        
+
+        .main {
+            flex: 1;
+            background: linear-gradient(135deg, #7fb3d3 0%, #5f9ea0 100%);
+            padding: 30px 20px;
+        }
+
+        .section-title {
+           font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .services-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            height:600px;
+            overflow: auto;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: #f8f9fa;
+            border-color: #5f9ea0;
+        }
+
+        .service-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .service-details h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .service-details p {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .service-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .service-arrow {
+            color: #5f9ea0;
+            font-size: 18px;
+        }
+
+        .bottom-nav {
+            background: white;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        
+
+        /* Desktop Styles */
+        @media (max-width: 619px) {
+            
+            .main-content {
+                  padding: 2px 2px; 
+           }
+            .header {
+                padding: 25px 40px;
+                border-radius: 20px 20px 0 0;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .app-title {
+                font-size: 24px;
+            }
+
+            .app-subtitle {
+                font-size: 18px;
+            }
+
+            .user-name {
+                font-size: 18px;
+            }
+
+            .user-avatar {
+                width: 50px;
+                height: 50px;
+            }
+
+            .progress-section {
+                padding: 30px 40px;
+            }
+
+            .progress-title {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            .step {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            
+            
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            .section-subtitle {
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+
+            .services-container {
+        padding: 10px;
+        margin: 10px 0;
+        height: auto ;
+        max-height: 85vh; 
+        padding: 5px 5px; 
+    }
+
+    .service-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .service-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .service-details h3 {
+        font-size: 14px;
+    }
+
+    .service-details p {
+        font-size: 12px;
+    }
+
+    .service-price {
+        font-size: 14px;
+    }
+
+            
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            
+
+            
+
+            .app-title {
+                font-size: 20px;
+            }
+
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .section-subtitle {
+                font-size: 16px;
+            }
+        }

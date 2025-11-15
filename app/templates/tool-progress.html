@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}Porgreso Formulario{% endblock %}
+
+{% block content %}
+   
+   <button class="back-button" onclick="window.history.back()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        volver
+    </button>
+<main class="main-content">
+    <div class="content">
+        
+         <div id="historialContainer"></div>
+
+       
+    </div>
+      <div class="button-group">
+                     <a class="btn btn-add" style="text-decoration: none;" href="{{ url_for('routes.tools_Menu') }}" >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+               Descripcion
+            </a>
+            <a class="btn btn-register" style="text-decoration: none;" href="{{ url_for('routes.tools_usage') }}" >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M16 5L7.5 13.5L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Registrar uso
+            </a>
+            <button class="btn btn-progress">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3 10H17M10 3V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+                Progreso
+            </button>
+        </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/tools-progress.js') }}"></script>
+
+{% endblock %}
+

@@ -1,0 +1,380 @@
+
+
+
+            .main-content {
+            flex: 1;
+            padding: 30px 20px;
+            background: #7fb3d3;
+        }
+
+        .welcome-section {
+            margin-bottom: 30px;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .appointments-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 2px solid #2c3e50;
+        }
+
+        .appointments-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+       .container-sub {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .calendar-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .appointments-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .appointments-subtitle {
+            font-size: 16px;
+            color: #5a9b9b;
+            margin-top: 2px;
+        }
+
+        .appointment-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .appointment-info {
+            flex: 1;
+        }
+
+        .appointment-type {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .appointment-therapist {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .appointment-date {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .date-icon, .time-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+            background: #666;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+
+        .appointment-time {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            margin-left: 20px;
+        }
+
+        .appointment-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .view-all-btn {
+            width: 100%;
+            padding: 15px;
+            background: white;
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .view-all-btn:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+         .bottom-nav {
+            background: white;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .info-pme {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .icon-pme {
+            width: 60px;
+            height: 60px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .details-pme {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .profile-role {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        /* Estilos para la segunda vista - Herramientas de salud mental */
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #2c3e50;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 20px;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .activity-category {
+            font-size: 14px;
+            color: #080808;
+        }
+        
+        .activity-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-completed {
+            background-color: #e8f6ef;
+            color: #27ae60;
+        }
+        
+        .status-practicing {
+            background-color: #fff9e6;
+            color: #f39c12;
+        }
+        
+        .status-not-started {
+            background-color: #fdeaea;
+            color: #e74c3c;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #ecf0f1;
+            margin: 20px 0;
+        }
+        
+        .link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Navegación entre páginas */
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .nav-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #050606;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-tab.active {
+            color: #090a0a;
+            border-bottom-color: #3498db;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+
+        
+        @media (max-width: 600px) {
+            .header {
+                padding: 10px 15px;
+            }
+            
+            .header-title {
+                font-size: 16px;
+            }
+            
+            .header-subtitle {
+                font-size: 14px;
+            }
+            
+            .user-name {
+                font-size: 14px;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .welcome-title {
+                font-size: 24px;
+            }
+            
+            .welcome-subtitle {
+                font-size: 16px;
+            }
+            
+            .appointments-card {
+                padding: 20px;
+            }
+            
+            .appointment-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .appointment-status {
+                margin-left: 0;
+                margin-top: 10px;
+                align-self: flex-end;
+            }
+             .card {
+                padding: 16px;
+            }
+            
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .activity-status {
+                align-self: flex-start;
+            }
+        }

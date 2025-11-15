@@ -1,0 +1,118 @@
+ {% extends "layout_terapeuta.html" %}
+
+{% block title %}Auditoria{% endblock %}
+
+{% block content %} 
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Registro de Auditoría</h1>
+            <p>Monitoreo de actividades y eventos del sistema</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon success">✓</div>
+                <div class="stat-content">
+                    <h3 id="totalSuccess">0</h3>
+                    <p>Acciones Exitosas</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon error">✕</div>
+                <div class="stat-content">
+                    <h3 id="totalErrors">0</h3>
+                    <p>Acciones Fallidas</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning">⚠</div>
+                <div class="stat-content">
+                    <h3 id="totalWarnings">0</h3>
+                    <p>Advertencias</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon info">📊</div>
+                <div class="stat-content">
+                    <h3 id="totalActivities">0</h3>
+                    <p>Total de Eventos</p>
+                </div>
+            </div>
+        </div>
+
+       <div class="audit-filters-wrapper">
+    <div class="audit-filters-grid">
+        <div class="audit-filter-group">
+            <label for="filterUser">Usuario/Identificación</label>
+            <input type="text" id="filterUser" placeholder="Buscar por identificación...">
+        </div>
+        <div class="audit-filter-group">
+            <label for="filterType">Tipo de Actividad</label>
+            <select id="filterType">
+                <option value="">Todos</option>
+                <option value="1">Consulta de Servicios</option>
+                <option value="2">Cita reservada</option>
+                <option value="3">Pago</option>
+                <option value="4">Registro de Diario</option>
+                <option value="5">Registro de Herramienta</option>
+                <option value="6">Registro PME</option>
+                <option value="7">Login exitoso</option>
+                <option value="8">Intento Fallido</option>
+                <option value="9">Recuperación de Usuario</option>
+                <option value="10">Recuperación de Contraseña</option>
+                <option value="11">Recuperación de Cuenta</option>
+                <option value="12">Registro PME</option>
+            </select>
+        </div>
+        <div class="audit-filter-group">
+            <label for="filterStatus">Estado</label>
+            <select id="filterStatus">
+                <option value="">Todos</option>
+                <option value="true">Exitoso</option>
+                <option value="false">Fallido</option>
+            </select>
+        </div>
+        <div class="audit-filter-group">
+            <label for="filterDateFrom">Desde</label>
+            <input type="date" id="filterDateFrom">
+        </div>
+        <div class="audit-filter-group">
+            <label for="filterDateTo">Hasta</label>
+            <input type="date" id="filterDateTo">
+        </div>
+    </div>
+
+    <div class="audit-filter-actions">
+        <button class="audit-btn-primary" onclick="applyFilters()">Aplicar Filtros</button>
+        <button class="audit-btn-secondary" onclick="clearFilters()">Limpiar</button>
+    </div>
+</div>
+
+        <!-- Audit Log -->
+        <div class="audit-log">
+            <div class="audit-log-header">
+                <h2>Eventos Recientes</h2>
+                <button class="export-btn" onclick="exportToCSV()">
+                    <span>📥</span>
+                    <span>Exportar CSV</span>
+                </button>
+            </div>
+
+            <div class="activity-list" id="activityList">
+                <!-- Activities will be loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+      const AUDITORIA_URL="{{ url_for('auditoria.ObtenerAuditorias') }}"
+    </script>
+    <script src="{{ url_for('static', filename='js/auditLods.js') }}"></script>
+{% endblock %}

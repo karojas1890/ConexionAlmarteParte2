@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Elegir Servicio{% endblock %}
+
+{% block content %}
+    
+    
+       
+<main class="main-content">
+    <div class="progress-section">
+        <div class="progress-title">Agendar cita</div>
+        <div class="progress-steps">
+            <div class="step active">1</div>
+            <div class="step-arrow">→</div>
+            <div class="step inactive">2</div>
+            <div class="step-arrow">→</div>
+            <div class="step inactive">3</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="section-title">Selecciona el servicio</div>
+        <div class="section-subtitle">Elige el tipo de servicio que necesitas</div>
+
+        <div class="services-container" id="services-container">
+            
+        </div>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/selecte-service.js') }}"></script>
+<script>
+    
+    const SELECTDATETIME = "{{ url_for('routes.select_datetime') }}";
+</script>
+{% endblock %}
+

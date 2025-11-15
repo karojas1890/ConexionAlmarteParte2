@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %}Pago{% endblock %}
+
+{% block content %}
+    <main class="main-content">  
+    
+
+        <div class="progress-section">
+            <div class="progress-title">Agendar cita</div>
+            <div class="progress-steps">
+                <div class="step completed">1</div>
+                <div class="step-arrow">→</div>
+                <div class="step completed">2</div>
+                <div class="step-arrow">→</div>
+                <div class="step active">3</div>
+            </div>
+        </div>
+
+        <div class="main">
+            <button class="back-button" onclick="window.history.back()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Volver
+            </button>
+            <div class="section-title">Resumen de tu cita</div>
+
+            <div class="summary-card">
+                <div class="summary-header" id="service-summary-text"></div>
+                <div class="summary-row">
+                    <span class="summary-label">Fecha</span>
+                    <span class="summary-value" id="summary-date">No seleccionada</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Hora</span>
+                    <span class="summary-value" id="summary-time">No seleccionada</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value" id="summary-price">₡0</span>
+                </div>
+            </div>
+
+            <div class="payment-section">
+                <div class="payment-title">Método de pago</div>
+                
+                <div class="payment-option selected" onclick="selectPayment(this)">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-text">Tarjeta de crédito o débito</div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-icon">🏦</div>
+                    <div class="payment-text">Transferencia bancaria</div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-text">SINPE móvil</div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-text">Efectivo el día de la cita</div>
+                </div>
+            </div>
+
+        
+             <button class="continue-btn" 
+                data-url="{{ url_for('routes.payment') }}" 
+                onclick="continueToPaymentForm(this)">
+                 Continuar
+            </button>
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/payment-summary.js') }}"></script>
+<script>
+  // URL del dashboard
+const dashboardUrl = "{{ url_for('routes.dashboard_Consultante') }}";
+const paymentforUrl = "{{ url_for('routes.payment') }}";
+const CITA_URL ="{{ url_for('Citas.CrearCita') }}"
+const usuario = "{{ session.get('idusuario') }}";
+</script>
+
+{% endblock %}

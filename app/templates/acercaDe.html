@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca De - Conexión Almarte</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/acercaDe.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+   
+</head>
+<body>
+    <div class="about-container">
+        <!-- Header con logo -->
+        <div class="about-header">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Almarte" class="company-logo">
+            </div>
+            <h1>Acerca de Conexión by Almarte</h1>
+        </div>
+
+        <!-- Contenido -->
+        <div class="about-body">
+            <!-- Información básica en tarjetas -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-card-label">Versión</div>
+                    <div class="info-card-value">1.0.7</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-label">Desarrollado por</div>
+                    <div class="info-card-value">Katherine Rojas Salazar</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-label">Empresa</div>
+                    <div class="info-card-value">AlmarteCR</div>
+                </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="description-section">
+                <h2>Sobre el Software</h2>
+                <p>
+                    Este software ha sido desarrollado con el objetivo de facilitar el registro, seguimiento y análisis de los avances personales y de los disparadores emocionales. Su diseño intuitivo permite a los usuarios documentar experiencias, evaluar emociones y conductas, y aplicar estrategias de afrontamiento de manera estructurada. De esta forma, proporciona herramientas profesionales para la gestión de la salud mental, promoviendo la autoobservación, el crecimiento personal y el bienestar emocional de manera continua y efectiva.
+                </p>
+            </div>
+
+            <!-- Características principales -->
+            <div class="features-section">
+                <h2>Características Principales</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-text">Registro y seguimiento de avances personales</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-text">Identificación de disparadores emocionales</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💡</div>
+                        <div class="feature-text">Estrategias de afrontamiento estructuradas</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-text">Análisis y visualización de progreso</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-text">Gestión segura de información personal</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌱</div>
+                        <div class="feature-text">Promoción del bienestar emocional continuo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer con botón -->
+        <div class="about-footer">
+            <a href="{{ url_for('auth.login') }}" style="text-decoration: none;" class="back-btn">← Volver</a>
+        </div>
+    </div>
+</body>
+</html>

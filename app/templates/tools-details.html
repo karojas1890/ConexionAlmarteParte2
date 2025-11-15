@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Detalles{% endblock %}
+
+{% block content %}
+   <main class="main-content">
+    <div class="main">
+        <div id="herramientas-container"></div>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/toolsdetails.js') }}"></script>
+<!--variables globales para las rutas-->
+<script>
+    const ROUTES = {
+        toolsMenu: "{{ url_for('routes.tools_Menu') }}",
+        toolsUsage: "{{ url_for('routes.tools_usage') }}",
+        toolsProgress: "{{ url_for('routes.tools_progress') }}"
+    };
+</script>
+
+{% endblock %}

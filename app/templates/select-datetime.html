@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}Elegir Fecha{% endblock %}
+
+{% block content %}
+    <main class="main-content">
+      
+
+        <div class="progress-section">
+            <div class="progress-title">Agendar cita</div>
+            <div class="progress-steps">
+                <div class="step completed">1</div>
+                <div class="step-arrow">→</div>
+                <div class="step active">2</div>
+                <div class="step-arrow">→</div>
+                <div class="step inactive">3</div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="section-title">Fecha y Hora</div>
+            <div class="section-subtitle">Selecciona cuándo te gustaría tener tu cita</div>
+
+            <div class="service-summary">
+                <div class="service-summary-text"  id="service-summary-text"></div>
+            </div>
+            <div class="date-section" >
+                <div class="date-title">Selecciona la fecha</div>
+                <div class="date-grid">
+        
+                </div>
+           </div>
+
+           <div class="time-section" style="overflow: auto;">
+               <div class="time-title">Selecciona la hora</div>
+               <div class="time-grid">
+         
+               </div>
+            </div>
+
+            <button class="continue-btn" 
+                data-url="{{ url_for('routes.payment_summary') }}" 
+                onclick="continueToPayment(this)">
+                 Continuar
+            </button>
+
+        </div>
+
+        
+    </main>
+    <script>
+        DISPONIBILIDAD_URL=`{{ url_for('Citas.ObtenerDisponibilidad') }}`
+    </script>
+<script src="{{ url_for('static', filename='js/selecte-datetime.js') }}"></script>
+
+    
+{% endblock %}
+

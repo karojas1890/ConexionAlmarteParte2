@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block title %}Estrategias de Salud{% endblock %}
+
+{% block content %} 
+  
+
+    <button class="back-button" onclick="window.history.back()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        volver
+    </button>
+
+     <div class="content-usage">
+        <div class="page-title">Registro de uso de estrategia de salud mental</div>
+
+        <div class="form-container">
+            <form id="usageForm">
+                <div class="form-section">
+                    <div class="section-title">Preguntas curiosas en vez de indicaciones</div>
+                    <div class="section-description">
+                        Categoría: Disciplina positiva en la familia<br><br>
+                        Formular la pregunta de manera que invite a la reflexión, en vez de dar órdenes,
+                        instrucciones o sermones. 
+                        Esto permite que la persona piense por sí misma y encuentre sus propias soluciones,
+                        fomentando la responsabilidad y el pensamiento crítico. 
+                        Además, las preguntas curiosas ayudan a mantener un ambiente de respeto mutuo y colaboración, 
+                        en lugar de generar resistencia o resentimiento por las órdenes impuestas. 
+                        Ejemplos de preguntas: ¿Qué necesitas para...?, ¿Cómo podrías...?, ¿Qué pasaría si...?
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="slider-container">
+                        <div class="slider-label">Nivel de efectividad (0-10)</div>
+                        <div class="slider-wrapper">
+                            <input type="range" min="0" max="10" value="5" class="slider" id="effectiveness">
+                            <div class="slider-labels">
+                                <span>0</span>
+                                <span>5</span>
+                                <span>10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">Estado de ánimo antes del uso de la estrategia</div>
+                    <div class="mood-selector" id="moodBefore">
+                        <div class="mood-option" data-value="muy-mal">
+                            <div class="mood-emoji">😢</div>
+                            <div class="mood-label">Muy mal</div>
+                        </div>
+                        <div class="mood-option" data-value="regular">
+                            <div class="mood-emoji">😐</div>
+                            <div class="mood-label">Regular</div>
+                        </div>
+                        <div class="mood-option" data-value="bien">
+                            <div class="mood-emoji">🙂</div>
+                            <div class="mood-label">Bien</div>
+                        </div>
+                        <div class="mood-option" data-value="muy-bien">
+                            <div class="mood-emoji">😊</div>
+                            <div class="mood-label">Muy bien</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">Estado de ánimo después del uso de la estrategia</div>
+                    <div class="mood-selector" id="moodAfter">
+                        <div class="mood-option" data-value="muy-mal">
+                            <div class="mood-emoji">😢</div>
+                            <div class="mood-label">Muy mal</div>
+                        </div>
+                        <div class="mood-option" data-value="regular">
+                            <div class="mood-emoji">😐</div>
+                            <div class="mood-label">Regular</div>
+                        </div>
+                        <div class="mood-option" data-value="bien">
+                            <div class="mood-emoji">🙂</div>
+                            <div class="mood-label">Bien</div>
+                        </div>
+                        <div class="mood-option" data-value="muy-bien">
+                            <div class="mood-emoji">😊</div>
+                            <div class="mood-label">Muy bien</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">Nivel de bienestar general antes del uso de la estrategia</div>
+                    <div class="mood-selector" id="wellnessBefore">
+                        <div class="mood-option" data-value="muy-bajo">
+                            <div class="mood-label">Muy bajo</div>
+                        </div>
+                        <div class="mood-option" data-value="bajo">
+                            <div class="mood-label">Bajo</div>
+                        </div>
+                        <div class="mood-option" data-value="medio">
+                            <div class="mood-label">Medio</div>
+                        </div>
+                        <div class="mood-option" data-value="alto">
+                            <div class="mood-label">Alto</div>
+                        </div>
+                        <div class="mood-option" data-value="muy-alto">
+                            <div class="mood-label">Muy alto</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="section-title">Nivel de bienestar general despues del uso de la estrategia</div>
+                    <div class="mood-selector" id="wellnessAfter">
+                        <div class="mood-option" data-value="muy-bajo">
+                            <div class="mood-label">Muy bajo</div>
+                        </div>
+                        <div class="mood-option" data-value="bajo">
+                            <div class="mood-label">Bajo</div>
+                        </div>
+                        <div class="mood-option" data-value="medio">
+                            <div class="mood-label">Medio</div>
+                        </div>
+                        <div class="mood-option" data-value="alto">
+                            <div class="mood-label">Alto</div>
+                        </div>
+                        <div class="mood-option" data-value="muy-alto">
+                            <div class="mood-label">Muy alto</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="observations">Observaciones/Comentarios:</label>
+                    <textarea id="observations" placeholder="Escribe tus observaciones aquí..."></textarea>
+                </div>
+
+                <div class="button-group" >
+                     <a class="btn btn-add" style="text-decoration: none;" href="{{ url_for('routes.tools_Menu') }}" >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+               Descripcion
+            </a>
+            <button type="button" class="btn btn-register" id="guardarUsoBtn"  >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M16 5L7.5 13.5L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Registrar uso
+            </button>
+            <a class="btn btn-progress" style="text-decoration: none;" href="{{ url_for('routes.tools_progress') }}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3 10H17M10 3V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+                Progreso
+            </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/tools-usage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/PopUp.js') }}"></script>
+
+   
+
+
+{% endblock %}

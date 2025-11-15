@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - Almarte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preguntaSeguridad.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Modal de confirmación -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-icon">✅</div>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
+        <div class="logo">AM</div>
+        <h1>Restablecer Credenciales</h1>
+        <p class="subtitle">Responde correctamente las siguientes preguntas de seguridad para continuar</p>
+
+        <div class="alert">
+            <div class="alert-title">🔒 Protocolo de Seguridad</div>
+            <div class="alert-text">Debes completar de froma correcta lo que se te pide. Si fallas, deberás esperar 3 horas para intentarlo nuevamente.</div>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <div class="error-text">
+                <strong>❌ Acceso Denegado</strong><br>
+                No cumplió con el protocolo de seguridad. Para recuperar su cuenta debe esperar 24 horas para volverlo a intentar.
+            </div>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <div class="success-text">
+                <strong>✓ Verificación Exitosa</strong><br>
+                Se ha enviado un código de seguridad de 6 dígitos a tu correo electrónico registrado.
+            </div>
+        </div>
+
+        <form id="securityForm">
+            <div class="form-group" id="question1Container">
+                <label for="question1" id="question1Label">Pregunta 1</label>
+                <input type="text" id="question1" name="question1" required>
+            </div>
+            
+            <button type="submit" class="btn">Verificar Datos</button>
+        </form>
+
+        <a href="{{ url_for('auth.login') }}" class="back-link">← Volver al inicio de sesión</a>
+    </div>
+    <script>
+    const Questions_URL = "{{ url_for('crede.ValidateSecurityQuestions') }}";
+     const CODE_URL = "{{ url_for('routes.codigo_restablecer') }}";
+   </script>
+    <script src="{{ url_for('static', filename='js/preguntaSeguridad.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}" > </script>
+</body>
+</html>

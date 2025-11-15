@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Herramientas{% endblock %}
+
+{% block content %}
+    
+    
+<div class="main-contentTools">
+    <div class="tool-card" id="tool-card">
+        <!-- El contenido se rellenará dinámicamente -->
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/tools-menu.js') }}"></script>
+
+ <script src="{{ url_for('static', filename='js/PopUp.js') }}"></script>
+{% endblock %}

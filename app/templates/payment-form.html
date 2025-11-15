@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}Formulario de pago{% endblock %}
+
+{% block content %}
+    
+       
+<main class="main-content"> 
+        <div class="progress-section">
+            <div class="progress-title">Agendar cita</div>
+            <div class="progress-steps">
+                <div class="step completed">1</div>
+                <div class="step-arrow">→</div>
+                <div class="step completed">2</div>
+                <div class="step-arrow">→</div>
+                <div class="step active">3</div>
+            </div>
+        </div>
+
+        <div class="main">
+            
+            <button class="back-button" onclick="window.history.back()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+               <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+               </svg>
+                Volver
+              </button>
+            <div class="section-title">Resumen de tu cita</div>
+
+             <div class="summary-card">
+                <div class="summary-header" id="service-summary-text"></div>
+                <div class="summary-row">
+                    <span class="summary-label">Fecha</span>
+                    <span class="summary-value" id="summary-date">No seleccionada</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Hora</span>
+                    <span class="summary-value" id="summary-time">No seleccionada</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value" id="summary-price">₡0</span>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-title">Ingrese la información para realizar el pago</div>
+                 <button class="manage-cards-btn" onclick="goToManageCards()">
+                    <span class="card-icon">💳</span>
+                    <span>Usar tarjeta guardada</span>
+                    <span class="arrow-icon">→</span>
+                </button>
+                <div class="form-group">
+                    <label class="form-label">Número de tarjeta</label>
+                    <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha de expiración</label>
+                        <input type="text" class="form-input" placeholder="MM" maxlength="2">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" style="color: transparent;">.</label>
+                        <input type="text" class="form-input" placeholder="AA" maxlength="2">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Código de seguridad</label>
+                    <input type="text" class="form-input" placeholder="123" maxlength="4">
+                </div>
+            </div>
+
+            <div class="token-section">
+                <div class="token-title">Token de seguridad</div>
+                <div class="form-group">
+                    <label class="form-label">Token recibido por email</label>
+                    <input type="text" class="form-input" placeholder="Ingrese el token">
+                </div>
+            </div>
+
+            
+            <button class="continue-btn" onclick="continueToPaymentForm()">Confirmar y pagar</button>
+        </div>
+
+       
+
+</main> 
+
+<script>
+    // URL del dashboard
+const dashboardUrl = "{{ url_for('routes.dashboard_Consultante') }}"
+const CITA_URL ="{{ url_for('Citas.CrearCita') }}"
+const usuario = "{{ session.get('idusuario') }}"
+const ADDCARD_URL="{{ url_for('routes.use_card') }}"
+</script>
+   <script src="{{ url_for('static', filename='js/payment-form.js') }}"></script>
+{% endblock %}

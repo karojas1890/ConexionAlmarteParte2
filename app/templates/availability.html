@@ -1,0 +1,77 @@
+{% extends "layout_terapeuta.html" %}
+
+{% block title %}Menu Principal{% endblock %}
+
+{% block content %}
+    
+<div class="container">
+  <!-- Encabezado de página -->
+  <div class="page-header">
+      <h1 class="page-title">Disponibilidad de Horarios</h1>
+      <p class="page-subtitle">Selecciona tus fechas y horas disponibles</p>
+  </div>
+
+  <div class="content-grid">
+      <!-- Calendario -->
+      <div class="calendar-card">
+          <div class="calendar-header">
+              <h2 class="calendar-title" id="calendar-month">Enero 2025</h2>
+              <div class="calendar-nav">
+                  <button id="prev-month" class="nav-btn">&lt;</button>
+                  <button id="next-month" class="nav-btn">&gt;</button>
+              </div>
+          </div>
+
+          <div class="calendar">
+              <div class="calendar-weekdays">
+                  <div class="weekday">Dom</div>
+                  <div class="weekday">Lun</div>
+                  <div class="weekday">Mar</div>
+                  <div class="weekday">Mié</div>
+                  <div class="weekday">Jue</div>
+                  <div class="weekday">Vie</div>
+                  <div class="weekday">Sáb</div>
+              </div>
+              <div class="calendar-days" id="calendar-days"></div>
+          </div>
+
+          <!-- Leyenda -->
+          <div class="legend">
+              <div class="legend-item">
+                  <div class="legend-color" style="background: #c6f6d5; border: 2px solid #38a169;"></div>
+                  <span>Disponible</span>
+              </div>
+              <div class="legend-item">
+                  <div class="legend-color" style="background: #feebc8; border: 2px solid #dd6b20;"></div>
+                  <span>Parcialmente disponible</span>
+              </div>
+              <div class="legend-item">
+                  <div class="legend-color" style="background: #fed7d7; border: 2px solid #e53e3e;"></div>
+                  <span>No disponible</span>
+              </div>
+          </div>
+      </div>
+
+      <!-- Slots de horario -->
+      <div class="time-slots-card">
+          <div class="slots-header">
+              <h3 class="slots-title">Horarios Disponibles</h3>
+              <p class="selected-date" id="selected-date">Seleccione un día</p>
+          </div>
+
+          <div class="time-slots-list" id="time-slots-list"></div>
+
+          <button class="save-btn" id="save-slots-btn">Guardar Cambios</button>
+      </div>
+  </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/availability.js') }}"></script>
+<script>
+    const AVAILABILITY_URL="{{ url_for('Citas.ObtenerDisponibilidad') }}"
+</script>
+
+
+   
+   {% endblock %}
