@@ -46,9 +46,9 @@ def verificar_Codigo():
        dashboard_url= url_for("routes.quien_eres")
     return render_template("VerificarCodigo.html", dashboard_url=dashboard_url)
 
-# @routes_bp.route("/Tipo_Cambios", endpoint="Tipo_Cambios")
-# def TipoCambio():
-#     return render_template("tipoCambios.html")
+@routes_bp.route("/Tipo_Cambios", endpoint="Tipo_Cambios")
+def TipoCambio():
+    return render_template("tipoCambios.html")
 
 @routes_bp.route("/diary", endpoint="diary")
 @rolRequired(1,3,4)
