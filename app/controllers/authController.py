@@ -99,9 +99,9 @@ def VerificarCodigo():
                 timeout=10
             )
             response.raise_for_status()
-            print(response)
+           
             data = response.json()
-            print(data)
+           
             rol=session.get('tipo')
             if data.get("success"):
                

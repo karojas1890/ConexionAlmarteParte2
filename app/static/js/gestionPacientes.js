@@ -32,7 +32,65 @@
                 closeAddPatientModal();
             }
         });
+// Función para buscar en el registro civil
+function almarte_searchCivil() {
+    const cedula = document.getElementById('almarte-cedula-search').value;
+    const statusDiv = document.getElementById('almarte-search-status');
+    
+    if (!cedula) {
+        statusDiv.textContent = ' Por favor ingrese una cédula';
+        statusDiv.style.color = '#d32f2f';
+        return;
+    }
 
+    statusDiv.textContent = '🔍 Buscando...';
+    statusDiv.style.color = '#4A9B94';
+
+    // Call to civil registry API
+    fetch(`${REGISTROCIVIL_URL}?identificacion=${cedula}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                statusDiv.textContent = ' ' + data.error;
+                statusDiv.style.color = '#d32f2f';
+            } else {
+                // Fill form fields with data from API
+                document.getElementById('identification').value = data.cedula || '';
+                document.getElementById('nombre').value = data.nombre || '';
+                document.getElementById('apellido1').value = data.apellido1 || '';
+                document.getElementById('apellido2').value = data.apellido2 || '';
+                
+                // Format date if exists
+                if (data.fecha_nacimiento) {
+                    document.getElementById('fechaNacimiento').value = data.fecha_nacimiento.split('T')[0];
+                }
+                
+                document.getElementById('provincia').value = data.provincia || '';
+                document.getElementById('canton').value = data.canton || '';
+                document.getElementById('distrito').value = data.distrito || '';
+                document.getElementById('direccion').value = data.direccion_exacta || '';
+                
+                // Calcular edad automáticamente si hay fecha de nacimiento
+                if (data.fecha_nacimiento) {
+                    const birthDate = new Date(data.fecha_nacimiento);
+                    const today = new Date();
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const monthDiff = today.getMonth() - birthDate.getMonth();
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    document.getElementById('edad').value = age;
+                }
+                
+                statusDiv.textContent = '✓ Datos cargados exitosamente';
+                statusDiv.style.color = '#4caf50';
+            }
+        })
+        .catch(error => {
+            statusDiv.textContent = 'Error al consultar el registro civil';
+            statusDiv.style.color = '#d32f2f';
+        });
+}
 async function submitPatient() {
   const data = {
     identificacion: document.getElementById("identification").value,

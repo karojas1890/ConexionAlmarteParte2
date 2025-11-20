@@ -62,6 +62,17 @@
     </div>
 
     <div class="modal-body">
+
+     <div class="almarte-search-section" style="margin-bottom: 25px; padding: 20px; background: linear-gradient(135deg, #e8f5f4 0%, #f0fafa 100%); border-radius: 10px; border: 2px solid #5BA8A0;">
+         <h4 style="margin: 0 0 15px; color: #4A9B94; font-size: 16px; font-weight: 600;">🔍 Buscar en Registro Civil</h4>
+          <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+               <input type="text" id="almarte-cedula-search" placeholder="Ingrese cédula (ej: 304660065)" maxlength="20" style="flex: 1; padding: 10px; border: 2px solid #5BA8A0; border-radius: 8px; font-size: 14px; font-family: inherit;">
+                <button type="button" onclick="almarte_searchCivil()" style="padding: 10px 20px; background: linear-gradient(135deg, #5BA8A0 0%, #4A9B94 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px;">Buscar</button>
+            </div>
+            _<div id="almarte-search-status" style="font-size: 13px; color: #4A9B94;"></div>
+      </div>
+
+
       <form id="addPatientForm">
         <div class="form-row">
           <div class="form-group">
@@ -163,7 +174,9 @@
     const PROVINCIA_URL="{{ url_for('geolocalizacion.GetEstado') }}"
     const CIUDAD_URL="{{ url_for('geolocalizacion.GetCiudad') }}"
     const BARRIO_URL="{{ url_for('geolocalizacion.GetBarrio') }}"
+    const REGISTROCIVIL_URL = "{{ url_for('Usuarios.ConsultaRegistroCivil') }}";
 </script>
 <script src="{{ url_for('static', filename='js/gestionPacientes.js') }}"></script>
 
   {% endblock %}
+
