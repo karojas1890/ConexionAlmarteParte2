@@ -4,8 +4,6 @@
 
 {% block content %}
     <main class="main-content">  
-    
-
         <div class="progress-section">
             <div class="progress-title">Agendar cita</div>
             <div class="progress-steps">
@@ -40,6 +38,10 @@
                     <span class="summary-label">Total</span>
                     <span class="summary-value" id="summary-price">₡0</span>
                 </div>
+                <div class="summary-row" id="usd-equivalent" style="display: none;">
+                    <span class="summary-label">Equivalente USD</span>
+                    <span class="summary-value" id="summary-usd">$0.00</span>
+                </div>
             </div>
 
             <div class="payment-section">
@@ -60,29 +62,46 @@
                     <div class="payment-text">SINPE móvil</div>
                 </div>
 
+                <!-- Seccion de PayPal -->
+                <div class="almarte-paypal-section">
+                    <div class="almarte-paypal-title">Pagar con PayPal</div>
+                    
+                    <div class="almarte-paypal-button-container">
+                        <div id="almarte-paypal-button-container"></div>
+                    </div>
+
+                    <div class="almarte-paypal-info">
+                        <div class="almarte-paypal-info-title"></div>
+                        <p class="almarte-paypal-info-text"></p>
+                        <p class="almarte-paypal-info-text" id="paypal-exchange-rate"></p>
+                    </div>
+                </div>
+
                 <div class="payment-option" onclick="selectPayment(this)">
                     <div class="payment-icon">💵</div>
                     <div class="payment-text">Efectivo el día de la cita</div>
                 </div>
             </div>
 
-        
-             <button class="continue-btn" 
+            <button class="continue-btn" 
                 data-url="{{ url_for('routes.payment') }}" 
                 onclick="continueToPaymentForm(this)">
                  Continuar
             </button>
         </div>
-
     </main>
-
-    <script src="{{ url_for('static', filename='js/payment-summary.js') }}"></script>
-<script>
-  // URL del dashboard
-const dashboardUrl = "{{ url_for('routes.dashboard_Consultante') }}";
-const paymentforUrl = "{{ url_for('routes.payment') }}";
-const CITA_URL ="{{ url_for('Citas.CrearCita') }}"
-const usuario = "{{ session.get('idusuario') }}";
+   <script>
+    const dashboardUrl = "{{ url_for('routes.dashboard_Consultante') }}";
+    const paymentforUrl = "{{ url_for('routes.payment') }}";
+    const CITA_URL ="{{ url_for('Citas.CrearCita') }}"
+    const usuario = "{{ session.get('idusuario') }}";
+    const TC_URL="{{ url_for('tpc.ConsultarTipoCambio') }}";
 </script>
-
+   </script>
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZfjbKTM0Mrs69k-q1LtCyqsd36OFn8temhI756Rw5tW6QecVtrGHN5NBABwIGyvrQyu-wiYyoQiG2M3&currency=USD"></script>
+    
+    <script src="{{ url_for('static', filename='js/payment-summary.js') }}"></script>
+    
+ 
 {% endblock %}

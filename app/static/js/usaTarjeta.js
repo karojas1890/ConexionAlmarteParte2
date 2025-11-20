@@ -45,7 +45,7 @@ function useCard(card) {
     try {
         // Guarda la tarjeta seleccionada en localStorage
         localStorage.setItem("selectedCard", JSON.stringify(card));
-
+        localStorage.setItem("cardHolderName", card.nombre_titular);
         // Redirige a la vista del formulario de pago
         window.location.href = paymentforUrl; 
     } catch (error) {
