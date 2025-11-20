@@ -17,7 +17,7 @@ def rolRequired(*roles):
     def decorador(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            user_rol = session.get('rol')
+            user_rol = session.get('tipo')
             if user_rol not in roles:
                 flash("No está autorizado para ingresar a esta vista.", "warning")
                 if user_rol in [1, 3, 4]:

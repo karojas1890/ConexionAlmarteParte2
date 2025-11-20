@@ -2,13 +2,6 @@ from flask import Flask
 from app.extensions import db
 import os
 
-
-
-
-
-# Genera la clave
-
-
 def create_app():
     app = Flask(__name__)
 

@@ -34,15 +34,15 @@ def PreguntaSeguridad():
 #decorador para proteccion de las paginas
 @loginRequired 
 def verificar_Codigo():
-    if "rol" not in session:
+    if "tipo" not in session:
         return redirect(url_for("auth.login"))
 
     
-    if session["rol"] == 1:  # tipo 1 = consultante
+    if session["tipo"] == 1:  # tipo 1 = consultante
         dashboard_url = url_for("routes.dashboard_Consultante")
-    elif session["rol"] == 2:  # tipo 2 = terapeuta
+    elif session["tipo"] == 2:  # tipo 2 = terapeuta
         dashboard_url = url_for("routes.dashboard")
-    elif session["rol"]==3 or session["rol"]==4:
+    elif session["tipo"]==3 or session["rol"]==4:
        dashboard_url= url_for("routes.quien_eres")
     return render_template("VerificarCodigo.html", dashboard_url=dashboard_url)
 

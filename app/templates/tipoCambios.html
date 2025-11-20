@@ -31,7 +31,7 @@
      <p><strong>Resultado:</strong> <span id="resultado">--</span></p>
   </div>
   <script>
-    let compra = 0, venta = 0;
+   let compra = 0, venta = 0;
 
 async function cargarDatos() {
   try {
@@ -39,8 +39,10 @@ async function cargarDatos() {
     const data = await response.json();
 
     if (data.compra && data.venta) {
-      compra = data.compra;
-      venta = data.venta;
+      // CONVERTIR A NÚMERO - Esto soluciona el error
+      compra = parseFloat(data.compra);
+      venta = parseFloat(data.venta);
+      
       document.getElementById("compra").textContent = "₡" + compra.toFixed(2);
       document.getElementById("venta").textContent = "₡" + venta.toFixed(2);
     } else {
@@ -80,7 +82,6 @@ document.getElementById("aCRC").addEventListener("click", function() {
 
 // Carga inicial
 cargarDatos();
-
   </script>
 </body>
 </html>

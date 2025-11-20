@@ -77,7 +77,7 @@
                         id="cardHolder" 
                         placeholder="Como aparece en la tarjeta"
                         required
-                        oninput="this.value = this.value.toUpperCase(); updatePreview()"
+                        oninput="this.value = this.value.updatePreview()"
                     >
                 </div>
 
@@ -153,7 +153,8 @@
     const ADDCARD_URL = "{{ url_for('card.AddCard') }}";
     const paymentforUrl = "{{ url_for('routes.payment') }}";
     const GETCARD_URL = "{{ url_for('card.GetCards') }}";
-    const DELETECARD_URL = "{{ url_for('card.DeleteCard', id_tarjeta=0) }}";
+    const DELETECARD_URL = "{{ url_for('card.DeleteCard', id_tarjeta=0) }}?id_usuario={{ session['idusuario'] }}";
+
 
    </script>
   
