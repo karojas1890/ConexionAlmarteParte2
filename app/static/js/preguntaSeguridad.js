@@ -100,7 +100,7 @@ if (q1) {
     if (q1.maxlength) input1.maxLength = q1.maxlength;
     if (q1.pattern) input1.pattern = q1.pattern;
 } else {
-    console.error("❌ No se pudo inicializar la pregunta de seguridad.");
+    console.error("No se pudo inicializar la pregunta de seguridad.");
 }
 
 // --- Envío del formulario ---
@@ -120,6 +120,7 @@ document.getElementById('securityForm').addEventListener('submit', function (e) 
 function validateSecurityAnswers(answer1, questionId1,tipousuario) {
     fetch(Questions_URL, {
         method: 'POST',
+        credentials: "include",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             question1: questionId1,
