@@ -12,7 +12,7 @@ def ValidarUsuarioRecovery():
     try:
         data = request.get_json()
 
-        url ="https://api-conexionalmarte.onrender.com/api/api/Credenciales/ValidarUsuario"
+        url ="https://api-conexionalmarte.onrender.com/api/Credenciales/ValidarUsuario"
 
         response = requests.post(url, json={
             "usuario": data.get("usuario"),
@@ -45,7 +45,7 @@ def ValidateSecurityQuestions():
         s = requests.Session()
         s.cookies.set("connect.sid", sid, domain="localhost")
 
-        url = "https://api-conexionalmarte.onrender.com/api/api/Credenciales/PreguntasSeguridad"
+        url = "https://api-conexionalmarte.onrender.com/api/Credenciales/PreguntasSeguridad"
 
         response = s.post(url, json={
             "question1": data.get("question1"),
@@ -71,7 +71,7 @@ def ValidateCode():
     try:
         data = request.get_json()
 
-        url = "https://api-conexionalmarte.onrender.com/api/api/Credenciales/ValidarCodigo"
+        url = "https://api-conexionalmarte.onrender.com/api/Credenciales/ValidarCodigo"
 
         response = requests.post(url, json={
             "code": data.get("code"),
@@ -93,7 +93,7 @@ def UpdatePassword():
     try:
         data = request.get_json()
 
-        url = "https://api-conexionalmarte.onrender.com/api/api/Credenciales/actualizarContrasena"
+        url = "https://api-conexionalmarte.onrender.com/api/Credenciales/actualizarContrasena"
 
         response = requests.post(url, json={
             "new_password": data.get("new_password")
