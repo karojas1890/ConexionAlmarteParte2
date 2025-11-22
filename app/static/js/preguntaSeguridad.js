@@ -118,7 +118,7 @@ document.getElementById('securityForm').addEventListener('submit', function (e) 
 });
 
 function validateSecurityAnswers(answer1, questionId1,tipousuario) {
-    fetch(Questions_URL, {
+    fetch('https://api-conexionalmarte.onrender.com/api/Credenciales/PreguntasSeguridad', {
         method: 'POST',
         credentials: "include",
         headers: { 'Content-Type': 'application/json' },
