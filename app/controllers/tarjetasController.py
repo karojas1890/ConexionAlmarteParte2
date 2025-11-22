@@ -1,6 +1,6 @@
 from flask import Blueprint,session, jsonify,request
 import requests
-import re
+import time
 
 card_bp = Blueprint('card', __name__)
 
@@ -21,11 +21,7 @@ def Pay():
         cvv = data.get("cvv", "")
         monto = data.get("monto", 0)
         
-        print(f"🔍 Datos recibidos del frontend:")
-        print(f"   - cardNumber: '{card_number}'")
-        print(f"   - cardHolder: '{card_holder}'")
-        print(f"   - cvv: '{cvv}'")
-        print(f"   - monto: {monto}")
+       
         
         # EXTRAER ÚLTIMOS 4 DÍGITOS DE FORMA ROBUSTA
         def extraer_ultimos_cuatro(card_str):
@@ -42,8 +38,6 @@ def Pay():
                 return ""
         
         card_number_final = extraer_ultimos_cuatro(card_number)
-        
-        print(f"✅ Número a enviar al banco: '{card_number_final}'")
         
         if not card_number_final or len(card_number_final) != 4:
             return jsonify({"success": False, "message": "Número de tarjeta inválido"}), 400
@@ -62,20 +56,17 @@ def Pay():
             "monto": float(monto)
         }
 
-        print("🔄 Enviando a API del banco...")
-        print(f"📦 Body: {banco_body}")
+       
 
         banco_res = requests.post(banco_url, json=banco_body, timeout=30)
         
-        print(f"📨 Respuesta banco - Status: {banco_res.status_code}")
-        print(f"📨 Respuesta banco - Text: {banco_res.text}")
         
         banco_res.raise_for_status()
         banco_data = banco_res.json()
 
         if not banco_data.get("valido", False):
             return jsonify({"success": False, "message": banco_data.get("mensaje", "Tarjeta inválida")}), 400
-
+        time.sleep(2)
         # Éxito
         return jsonify({
             "success": True, 
@@ -215,4 +206,31 @@ def DeleteCard(id_tarjeta):
         return jsonify({
             "success": False,
             "message": f"Error eliminando tarjeta: {str(e)}"
+        }), 500
+
+
+@card_bp.route('/sinpe', methods=['POST'])
+def VerificarSinpe():
+    try:
+        data = request.get_json()
+        SINPE_URL = "https://api-tarjetas-h814.onrender.com/api/tarjetas/Sinpe"
+        # Validar campos obligatorios
+        required_fields = ["ntelefono", "monto"]
+        missing = [f for f in required_fields if f not in data]
+        if missing:
+            return jsonify({"error": f"Faltan campos obligatorios: {', '.join(missing)}"}), 400
+
+        # Consumir el API externo
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(SINPE_URL, json=data, headers=headers)
+        response.raise_for_status()  # Lanza excepción si status != 200
+
+        # Retornar la respuesta del servicio externo
+        return jsonify(response.json())
+
+    except requests.exceptions.RequestException as e:
+        print("Error llamando al API externo de Sinpe:", e)
+        return jsonify({
+            "error": "Error llamando al API externo",
+            "details": str(e)
         }), 500

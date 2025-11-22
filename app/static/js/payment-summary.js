@@ -5,7 +5,143 @@
             amount: '0.00',
             description: ''
         };
-    
+           function selectPaymentAndOpenSINPE(element) {
+            selectPayment(element);
+            almarte_openSINPEModal();
+        }
+        function almarte_openSINPEModal() {
+            const modal = document.getElementById('almarte-sinpe-modal');
+            modal.classList.add('active');
+            document.getElementById('almarte-sinpe-reference').focus();
+        }
+         
+        function almarte_closeSINPEModal() {
+            const modal = document.getElementById('almarte-sinpe-modal');
+            modal.classList.remove('active');
+            document.getElementById('almarte-sinpe-form').reset();
+            document.querySelectorAll('.almarte-sinpe-error-msg').forEach(msg => msg.classList.remove('show'));
+            document.querySelectorAll('.almarte-sinpe-input').forEach(input => input.classList.remove('error'));
+        }
+
+        function almarte_validateSINPE(event) {
+            event.preventDefault();
+
+            const reference = document.getElementById('almarte-sinpe-reference').value.trim();
+            const phone = document.getElementById('almarte-sinpe-phone').value.trim();
+            const amount = document.getElementById('almarte-sinpe-amount').value.trim();
+
+            let isValid = true;
+
+            
+            document.querySelectorAll('.almarte-sinpe-error-msg').forEach(msg => msg.classList.remove('show'));
+            document.querySelectorAll('.almarte-sinpe-input').forEach(input => input.classList.remove('error'));
+
+            
+            if (!reference || reference.length < 6) {
+                almarte_showError('almarte-sinpe-reference', 'El número de referencia debe tener al menos 6 caracteres');
+                isValid = false;
+            } else if (!/^[a-zA-Z0-9]+$/.test(reference)) {
+                almarte_showError('almarte-sinpe-reference', 'Solo se permiten números y letras');
+                isValid = false;
+            }
+
+            
+            if (!phone || phone.length < 8) {
+                almarte_showError('almarte-sinpe-phone', 'Ingresa un número de teléfono válido');
+                isValid = false;
+            } else if (!/^[0-9]+$/.test(phone)) {
+                almarte_showError('almarte-sinpe-phone', 'Solo se permiten números');
+                isValid = false;
+            }
+
+            
+            const summaryAmount = document.getElementById('summary-price')?.textContent || '';
+            const summaryAmountNumber = parseInt(summaryAmount.replace(/[^\d]/g, ''));
+            
+            if (!amount || parseInt(amount) <= 0) {
+                almarte_showError('almarte-sinpe-amount', 'Ingresa un monto válido');
+                isValid = false;
+            } else if (summaryAmountNumber > 0 && parseInt(amount) !== summaryAmountNumber) {
+                almarte_showError('almarte-sinpe-amount', `El monto debe ser ₡${summaryAmountNumber}`);
+                isValid = false;
+            }
+
+            if (isValid) {
+                almarte_submitSINPE(reference, phone, amount);
+            }
+        }
+
+        function almarte_showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorMsg = document.getElementById(inputId + '-error');
+            input.classList.add('error');
+            errorMsg.textContent = message;
+            errorMsg.classList.add('show');
+        }
+
+        function almarte_submitSINPE(reference, phone, amount) {
+            const submitBtn = document.getElementById('almarte-sinpe-submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Validando...';
+
+            
+            fetch(SINPE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    reference: reference,
+                    phone: phone,
+                    amount: amount,
+                    appointmentData: localStorage.getItem('appointmentData') || '{}'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    almarte_showSINPESuccess();
+                    localStorage.setItem('sinpeValidated', 'true');
+                    localStorage.setItem('sinpeReference', reference);
+                } else {
+                    almarte_showError('almarte-sinpe-reference', data.message || 'No se pudo validar el SINPE. Intenta de nuevo.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Validar SINPE';
+                }
+            })
+            .catch(error => {
+                console.error('[v0] SINPE validation error:', error);
+                almarte_showError('almarte-sinpe-reference', 'Error de conexión. Intenta de nuevo.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Validar SINPE';
+            });
+        }
+
+        function almarte_showSINPESuccess() {
+            const modal = document.getElementById('almarte-sinpe-modal');
+            const content = document.querySelector('.almarte-sinpe-modal-content');
+            
+            const successHTML = `
+                <div class="almarte-sinpe-success">
+                    <div class="almarte-sinpe-success-icon">✓</div>
+                    <div class="almarte-sinpe-success-text">¡SINPE Validado!</div>
+                    <div class="almarte-sinpe-success-subtext">Tu pago ha sido confirmado correctamente</div>
+                </div>
+                <div class="almarte-sinpe-buttons">
+                    <button class="almarte-sinpe-btn almarte-sinpe-btn-submit" onclick="almarte_confirmSINPE()" style="width: 100%;">
+                        Continuar
+                    </button>
+                </div>
+            `;
+            
+            content.innerHTML = successHTML;
+        }
+
+        function almarte_confirmSINPE() {
+            almarte_closeSINPEModal();
+            showConfirmation();
+        }
+
         // Variable global para el tipo de cambio
         let tipoCambioVenta = 0;
 

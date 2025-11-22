@@ -41,7 +41,7 @@ async function continueToPaymentForm() {
     };
 
     try {
-        // 1️⃣ Validar tarjeta con endpoint Flask /pay
+        // 1️Validar tarjeta con endpoint Flask /pay
         const payRes = await fetch(PAY_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ async function continueToPaymentForm() {
             return; // detener proceso si el pago falla
         }
 
-        // 2️⃣ Preparar objeto de cita
+        //Preparar objeto de cita
         const citaData = {
             usuario,
             servicio,
@@ -74,7 +74,7 @@ async function continueToPaymentForm() {
             }
         };
 
-        // 3️⃣ Crear la cita solo si el pago fue exitoso
+        //Crear la cita solo si el pago fue exitoso
         const citaRes = await fetch(CITA_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

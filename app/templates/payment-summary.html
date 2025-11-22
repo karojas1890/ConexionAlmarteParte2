@@ -57,7 +57,7 @@
                     <div class="payment-text">Transferencia bancaria</div>
                 </div>
 
-                <div class="payment-option" onclick="selectPayment(this)">
+                <div class="payment-option" id="almarte-sinpe-option" onclick="selectPaymentAndOpenSINPE(this)">
                     <div class="payment-icon">📱</div>
                     <div class="payment-text">SINPE móvil</div>
                 </div>
@@ -93,9 +93,10 @@
    <script>
     const dashboardUrl = "{{ url_for('routes.dashboard_Consultante') }}";
     const paymentforUrl = "{{ url_for('routes.payment') }}";
-    const CITA_URL ="{{ url_for('Citas.CrearCita') }}"
+    const CITA_URL ="{{ url_for('Citas.CrearCita') }}";
     const usuario = "{{ session.get('idusuario') }}";
     const TC_URL="{{ url_for('tpc.ConsultarTipoCambio') }}";
+    const SINPE_URL="{{ url_for('card.VerificarSinpe') }}";
 </script>
    </script>
     <!-- PayPal SDK -->
