@@ -33,27 +33,23 @@ def ValidateSecurityQuestions():
     try:
         data = request.get_json()
 
-        sid = request.cookies.get('sessionId')
-        print("SID recibido:", sid)  # <<< DIAGNÓSTICO
-
-        if not sid:
-            return jsonify({
-                "error": "No session cookie received",
-                "message": "El cliente no envió connect.sid"
-            }), 401
-
-        s = requests.Session()
-        s.cookies.set("connect.sid", sid, domain="localhost")
-
+        cookies_from_browser = request.headers.get('Cookie', '')
+        headers = {
+            'Content-Type': 'application/json',
+            'Cookie': cookies_from_browser  # ← PASAR LAS COOKIES TAL CUAL
+        }
         url = "https://api-conexionalmarte.onrender.com/api/Credenciales/PreguntasSeguridad"
 
-        response = s.post(url, json={
-            "question1": data.get("question1"),
-            "answer1": data.get("answer1"),
-            "tipouss": data.get("tipouss")
-        })
+        response = requests.post(
+            url, 
+            headers=headers, 
+            json={
+                "question1": data.get("question1"),
+                "answer1": data.get("answer1"),
+                "tipouss": data.get("tipouss")
+            }
+        )
 
-        print("Status API externo:", response.status_code)  # <<< DIAGNÓSTICO
 
         response.raise_for_status()
         return jsonify(response.json())
