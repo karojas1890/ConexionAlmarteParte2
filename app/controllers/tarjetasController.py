@@ -53,7 +53,7 @@ def Pay():
             "nombretarjetahabiente": card_holder,
             "identificaciontarjetahabiente": str(cedula),
             "codigoseguridad": cvv,
-            "monto": float(monto)
+            "monto": int(monto)
         }
 
        

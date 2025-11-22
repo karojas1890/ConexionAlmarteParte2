@@ -33,7 +33,7 @@ def ValidateSecurityQuestions():
     try:
         data = request.get_json()
 
-        sid = request.cookies.get('connect.sid')
+        sid = request.cookies.get('sessionId')
         print("SID recibido:", sid)  # <<< DIAGNÓSTICO
 
         if not sid:
