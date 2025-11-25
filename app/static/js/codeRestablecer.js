@@ -15,6 +15,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                console.log(data.redirect_url)
                 if (data.success) {
                   if (data.type==="2"){
                     showModal('¡Usuario recuperado!', 'Revisa el correo electronico paraverificar los datos .', 'success');
