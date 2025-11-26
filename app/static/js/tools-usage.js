@@ -84,11 +84,13 @@
             const resp = await res.json();
 
             if (resp.success) {
-                alert("Uso registrado correctamente!");
+              
+                 showModal("Éxito", "Uso registrado correctamente!.", "success"); 
                 document.getElementById("usageForm").reset();
                 document.querySelectorAll(".mood-option.selected").forEach(opt => opt.classList.remove("selected"));
             } else {
-                alert("Error: " + resp.error);
+               
+                showModal("Error", resp.error, "error"); 
             }
         } catch (err) {
             console.error("Error al registrar uso:", err);

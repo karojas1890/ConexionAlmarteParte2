@@ -151,7 +151,7 @@ form.addEventListener("submit", (e) => {
                
               
                 setTimeout(() => { 
-                    window.location.href = URL_DIARY; 
+                    window.location.href = "{{ url_for('routes.diary') }}"; 
                 }, 3000);
         } else if (response.message) {
             showModal("Error: " + response.message,"error");
