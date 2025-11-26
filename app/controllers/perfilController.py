@@ -10,7 +10,7 @@ def ObtenerPerfil():
 
     
 
-    url = f"http://localhost:3000/api/Perfil/ObtenerPerfil?id_usuario={id_usuario}"
+    url = f"https://api-conexionalmarte.onrender.com/api/Perfil/ObtenerPerfil?id_usuario={id_usuario}"
 
     try:
         response = requests.get(url)
@@ -45,7 +45,7 @@ def GuardarPerfil():
     data["urlimagen"] = data.get("urlimagen", None)
     
     try:
-        url = f"http://localhost:3000/api/Perfil/EditarPerfil"
+        url = f"https://api-conexionalmarte.onrender.com/api/Perfil/EditarPerfil"
         response = requests.put(url, json=data)
         response.raise_for_status()
         session["nombre"] = data.get("nombre")

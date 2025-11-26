@@ -23,10 +23,10 @@ def CrearCita():
         correoPaciente=session.get("correo")
         correoTerapeuta=session.get("correo_terapeuta")
         # Enviar al API de Node
-       # node_url = "https://api-conexionalmarte.onrender.com/api/Citas/CrearCita"
-        node_url = "http://localhost:3000/api/Citas/CrearCita"
+        url = "https://api-conexionalmarte.onrender.com/api/Citas/CrearCita"
         
-        node_body = {
+        
+        body = {
             "usuario": session.get("idusuario"),             
             "paciente": session.get("nombre"),           
             "correoPaciente": correoPaciente,
@@ -38,8 +38,8 @@ def CrearCita():
             "estado": estado,
             "pago": pago
             }
-        print(node_body)
-        response = requests.post(node_url, json=node_body)
+      
+        response = requests.post(url, json=body)
         response.raise_for_status()
         data = response.json()
         print(data)

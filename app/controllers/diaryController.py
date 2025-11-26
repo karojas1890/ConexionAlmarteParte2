@@ -104,9 +104,8 @@ def ObtenerRecomendaciones():
 @diary_bp.route("/guardar_evento", methods=["POST"])
 def GuardarEvento():
     try:
-        #url = "https://api-conexionalmarte.onrender.com/api/Diario/GuardarEvento"
-        # URL del API Node
-        url = "http://localhost:3000/api/Diario/GuardarEvento"
+        url = "https://api-conexionalmarte.onrender.com/api/Diario/GuardarEvento"
+        
         
         # Recibe el body enviado por el frontend
         data = request.get_json()
