@@ -79,7 +79,7 @@
             const submitBtn = document.getElementById('almarte-sinpe-submit-btn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Validando...';
-            const selectedPrice = parseFloat(localStorage.getItem("selectedPrice")) || 0;
+            
             
             fetch(SINPE_URL, {
                 method: 'POST',
@@ -96,19 +96,6 @@
             .then(response => response.json())
             .then(data => {
                 if (data.valido) {
-                    const montoSinpe = parseFloat(data.registro.monto);
-
-                 if (montoSinpe.toFixed(2) !== precioCita.toFixed(2)) {
-                  almarte_showError(
-                       'almarte-sinpe-amount',
-                       `El monto del SINPE (₡${montoSinpe}) no coincide con el precio de la cita (₡${selectedPrice}).`
-                   );
-
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Validar SINPE';
-                  return;
-                }
-
                     almarte_showSINPESuccess();
                     localStorage.setItem('sinpeValidated', 'true');
                     localStorage.setItem('sinpeReference', reference);
