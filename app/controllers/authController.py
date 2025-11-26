@@ -48,8 +48,8 @@ def login():
                 session["terapeuta_apellido1"] = user_data.get("terapeuta_apellido1")
                 session["terapeuta_apellido2"] = user_data.get("terapeuta_apellido2")
                 session["terapeuta_codigoprofesional"] = user_data.get("terapeuta_codigoprofesional")
-                session["correo"] = user_data.get("correo")
-                session["correo_terapeuta"] = user_data.get("correo_terapeuta")
+                session["correo"] = user_data.get("consultante_correo")
+                session["correo_terapeuta"] = user_data.get("terapeuta_correo")
                 session["intentos"] = user_data.get("intentos")
                 session["estado"] = user_data.get("estado")
 

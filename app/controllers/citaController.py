@@ -20,22 +20,30 @@ def CrearCita():
 
         estado = data.get("estado", 0)
         pago = data.get("pago", 1)
-
+        correoPaciente=session.get("correo")
+        correoTerapeuta=session.get("correo_terapeuta")
         # Enviar al API de Node
-        node_url = "https://api-conexionalmarte.onrender.com/api/Citas/CrearCita"
+       # node_url = "https://api-conexionalmarte.onrender.com/api/Citas/CrearCita"
+        node_url = "http://localhost:3000/api/Citas/CrearCita"
+        
         node_body = {
-            "usuario": usuario,
-            "servicio": servicio,
-            "iddisponibilidad": iddisponibilidad,
+            "usuario": session.get("idusuario"),             
+            "paciente": session.get("nombre"),           
+            "correoPaciente": correoPaciente,
+            "terapeutaNombre": session.get("terapeuta_nombre"),
+            "terapeutaApellido": session.get("terapeuta_apellido1"),
+            "correoTerapeuta": correoTerapeuta,
+            "servicio": data.get("servicio"),
+            "iddisponibilidad": data.get("iddisponibilidad"),
             "estado": estado,
             "pago": pago
-        }
-
-        node_res = requests.post(node_url, json=node_body)
-        node_res.raise_for_status()
-        node_data = node_res.json()
-
-        return jsonify({"success": True, "data": node_data}), node_res.status_code
+            }
+        print(node_body)
+        response = requests.post(node_url, json=node_body)
+        response.raise_for_status()
+        data = response.json()
+        print(data)
+        return jsonify({"success": True, "data": data}), response.status_code
 
     except requests.exceptions.RequestException as e:
         print("Error llamando API de citas:", e)

@@ -215,16 +215,16 @@ def VerificarSinpe():
         data = request.get_json()
         SINPE_URL = "https://api-tarjetas-h814.onrender.com/api/tarjetas/Sinpe"
         # Validar campos obligatorios
-        required_fields = ["ntelefono", "monto"]
+        required_fields = ["nreferencia","ntelefono", "monto"]
         missing = [f for f in required_fields if f not in data]
         if missing:
             return jsonify({"error": f"Faltan campos obligatorios: {', '.join(missing)}"}), 400
-
+        
         # Consumir el API externo
         headers = {"Content-Type": "application/json"}
         response = requests.post(SINPE_URL, json=data, headers=headers)
         response.raise_for_status()  # Lanza excepción si status != 200
-
+        print(response)
         # Retornar la respuesta del servicio externo
         return jsonify(response.json())
 

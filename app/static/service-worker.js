@@ -1,4 +1,4 @@
-const CACHE_NAME = "flask-pwa-v8";//se actualiza la version
+const CACHE_NAME = "flask-pwa-v11";//se actualiza la version
 const urlsToCache = [
   "/",                              // Pagina principal
   "/static/css/loginStyle.css",        // CSS         

@@ -36,7 +36,51 @@ def ObtenerRecomendacionesTools():
 
 @tools_bp.route("/GuardarUso", methods=['POST'])
 def GuardarUso():
-    pass
+    try:
+       
+        id_usuario = session.get("idusuario")
+
+        if not id_usuario:
+            return jsonify({
+                "success": False,
+                "message": "Usuario no autenticado"
+            }), 401
+
+       
+        body = request.get_json()
+
+        if not body:
+            return jsonify({"success": False, "message": "Body JSON requerido"}), 400
+
+      
+        data = {
+            "id_usuario": id_usuario,
+            "idasignacion": body.get("idasignacion"),
+            "efectividad": body.get("efectividad"),
+            "animoAntes": body.get("animoAntes"),
+            "animoDespues": body.get("animoDespues"),
+            "bienestarAntes": body.get("bienestarAntes"),
+            "bienestarDespues": body.get("bienestarDespues"),
+            "comentario": body.get("comentario")
+        }
+
+       
+        node_url = "https://api-conexionalmarte.onrender.com/api/Herramientas/GuardarUso"
+
+        node_res = requests.post(node_url, json=data)
+        node_res.raise_for_status()
+
+  
+        result = node_res.json()
+        return jsonify(result)
+
+    except requests.exceptions.RequestException as e:
+        print("Error al llamar API Node:", e)
+        return jsonify({
+            "success": False,
+            "message": "Error API Node",
+            "details": str(e)
+        }), 500
 
 
 

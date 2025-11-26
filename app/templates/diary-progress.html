@@ -12,7 +12,15 @@
         </svg>
         volver
     </button>
-
+   <!-- Modal de confirmación -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-icon">✅</div>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
     <div class="content">
         <div class="page-title">Registro de progreso</div>
 
@@ -138,16 +146,20 @@ form.addEventListener("submit", (e) => {
     })
     .then(res => res.json())
     .then(response => {
-        if (response.mensaje) {
-            alert(response.mensaje);
-            window.location.href = "{{ url_for('routes.diary') }}"; 
-        } else if (response.error) {
-            alert("Error: " + response.error);
+        if (response.success) {
+             showModal("Éxito", "Se guardó de forma correcta.", "success"); 
+               
+              
+                setTimeout(() => { 
+                    window.location.href = URL_DIARY; 
+                }, 3000);
+        } else if (response.message) {
+            showModal("Error: " + response.message,"error");
         }
     })
     .catch(err => {
         console.error("Error al enviar los datos:", err);
-        alert("Ocurrió un error al guardar el registro.");
+        showModal("Error","Ocurrió un error al guardar el registro.","error");
     });
   });
 

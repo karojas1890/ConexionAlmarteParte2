@@ -40,7 +40,6 @@
     const strategy = parseInt(localStorage.getItem("idasignacionSeleccionada"));
 
     const observations = document.getElementById("observations");
-    alert(strategy)
     const moodMap = { "muy-mal": 1, "regular": 2, "bien": 3, "muy-bien": 4 };
     const wellnessMap = { "muy-bajo": 1, "bajo": 2, "medio": 3, "alto": 4, "muy-alto": 5 };
 

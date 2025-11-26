@@ -5,16 +5,16 @@
             amount: '0.00',
             description: ''
         };
-           function selectPaymentAndOpenSINPE(element) {
-            selectPayment(element);
-            almarte_openSINPEModal();
-        }
+        
         function almarte_openSINPEModal() {
             const modal = document.getElementById('almarte-sinpe-modal');
             modal.classList.add('active');
             document.getElementById('almarte-sinpe-reference').focus();
         }
-         
+        function selectPaymentAndOpenSINPE(element) {
+            selectPayment(element);
+            almarte_openSINPEModal();
+        }
         function almarte_closeSINPEModal() {
             const modal = document.getElementById('almarte-sinpe-modal');
             modal.classList.remove('active');
@@ -37,7 +37,7 @@
             document.querySelectorAll('.almarte-sinpe-input').forEach(input => input.classList.remove('error'));
 
             
-            if (!reference || reference.length < 6) {
+            if (!reference || reference.length < 4) {
                 almarte_showError('almarte-sinpe-reference', 'El número de referencia debe tener al menos 6 caracteres');
                 isValid = false;
             } else if (!/^[a-zA-Z0-9]+$/.test(reference)) {
@@ -56,16 +56,12 @@
 
             
             const summaryAmount = document.getElementById('summary-price')?.textContent || '';
-            const summaryAmountNumber = parseInt(summaryAmount.replace(/[^\d]/g, ''));
+            
             
             if (!amount || parseInt(amount) <= 0) {
                 almarte_showError('almarte-sinpe-amount', 'Ingresa un monto válido');
                 isValid = false;
-            } else if (summaryAmountNumber > 0 && parseInt(amount) !== summaryAmountNumber) {
-                almarte_showError('almarte-sinpe-amount', `El monto debe ser ₡${summaryAmountNumber}`);
-                isValid = false;
-            }
-
+            } 
             if (isValid) {
                 almarte_submitSINPE(reference, phone, amount);
             }
@@ -91,18 +87,19 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    reference: reference,
-                    phone: phone,
-                    amount: amount,
+                    nreferencia: reference,
+                    ntelefono: phone,
+                    monto: amount,
                     appointmentData: localStorage.getItem('appointmentData') || '{}'
                 })
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.valido) {
                     almarte_showSINPESuccess();
                     localStorage.setItem('sinpeValidated', 'true');
                     localStorage.setItem('sinpeReference', reference);
+                    continueToPaymentForm();
                 } else {
                     almarte_showError('almarte-sinpe-reference', data.message || 'No se pudo validar el SINPE. Intenta de nuevo.');
                     submitBtn.disabled = false;
@@ -198,7 +195,7 @@
                         height: 48
                     },
                     createOrder: function(data, actions) {
-                        console.log("Creando orden PayPal por:", ALMARTE_PAYPAL_CONFIG.amount + " USD");
+                       
                         return actions.order.create({
                             purchase_units: [{
                                 amount: {
@@ -359,9 +356,8 @@
             document.querySelectorAll('.payment-option').forEach(option => option.classList.remove('selected'));
             element.classList.add('selected');
             window.selectedPayment = element.querySelector('.payment-text').innerText;
-            console.log('Método de pago seleccionado:', window.selectedPayment);
+            
         }
-
         // Función al continuar con el pago (para otros métodos)
         function continueToPaymentForm() {
             const servicio = parseInt(localStorage.getItem("selectedServiceId"));

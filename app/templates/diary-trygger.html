@@ -10,7 +10,15 @@
    
     const diaryUrl = "{{ url_for('routes.diary') }}";
 </script>
-
+  <!-- Modal de confirmación -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-icon">✅</div>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
 <button class="back-button" onclick="window.history.back()">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -86,84 +94,15 @@
         </form>
     </div>
 </div>
-
-<!--<script src="{{ url_for('static', filename='js/diary-trigger.js') }}"></script>-->
-
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    // inicializamos Choices con el select vacio
-    const emotionSelect = new Choices('#emotionSelect', { searchEnabled: true, itemSelectText: '', shouldSort: false });
-    const copingSelect = new Choices('#copingSelect', { searchEnabled: true, itemSelectText: '', shouldSort: false });
-    const strategySelect = new Choices('#strategySelect', { searchEnabled: true, itemSelectText: '', shouldSort: false });
-
-    // funcion auxiliar para cargar datos en Choices
-    const loadChoices = (selectInstance, data, valueKey, labelKey) => {
-        const choices = data.map(item => ({ value: item[valueKey], label: item[labelKey] }));
-        // limpia primero
-        selectInstance.clearStore();
-        // setea nuevas opciones
-        selectInstance.setChoices(choices, 'value', 'label', true);
-    };
-
-    
-    fetch("{{ url_for('diary.ObtenerEmociones') }}")
-        .then(res => res.json())
-        .then(emociones => loadChoices(emotionSelect, emociones, 'id', 'nombre'))
-        .catch(err => console.error("Error cargando emociones:", err));
-
-    fetch("{{ url_for('diary.ObtenerAfrontamiento') }}")
-        .then(res => res.json())
-        .then(conductas => loadChoices(copingSelect, conductas, 'id', 'nombre'))
-        .catch(err => console.error("Error cargando conductas:", err));
-
-   
-    fetch("{{ url_for('diary.ObtenerRecomendaciones') }}")
-        .then(res => res.json())
-        .then(recomendaciones => loadChoices(strategySelect, recomendaciones, 'idrecomendacion', 'nombre'))
-        .catch(err => console.error("Error cargando recomendaciones:", err));
-
- 
-    const form = document.getElementById("triggerForm");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const data = {
-        situacion: document.getElementById("situationInput").value,
-        emocion_id: emotionSelect.getValue(true),      
-        afrontamiento_id: copingSelect.getValue(true), 
-        estrategia_id: strategySelect.getValue(true),  
-        efectividad: document.getElementById("effectivenessInput").value,
-        tiporegistro: 0
-    };
-
-  
-
-    fetch("{{ url_for('diary.GuardarEvento') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
-        if (response.mensaje) {
-            alert(response.mensaje);
-            window.location.href = "{{ url_for('routes.diary') }}"; // redirige al diario
-        } else if (response.error) {
-            alert("Error: " + response.error);
-        }
-    })
-    .catch(err => {
-        console.error("Error al enviar los datos:", err);
-        alert("Ocurrió un error al guardar el registro.");
-    });
-  });
-
-});
-
-
+    const URL_RECOMENDACIONES="{{ url_for('diary.ObtenerRecomendaciones') }}"
+   const URL_AFRONTAMIENTO="{{ url_for('diary.ObtenerAfrontamiento') }}"
+    const URL_EMOCIONES="{{ url_for('diary.ObtenerEmociones') }}"
+    const URL_GuardarEvento="{{ url_for('diary.GuardarEvento') }}"
+      const  URL_DIARY="{{ url_for('routes.diary') }}"
 </script>
+<script src="{{ url_for('static', filename='js/diary-trygger.js') }}"></script>
+
 
 
 {% endblock %}
