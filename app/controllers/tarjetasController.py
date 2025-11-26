@@ -224,7 +224,7 @@ def VerificarSinpe():
         headers = {"Content-Type": "application/json"}
         response = requests.post(SINPE_URL, json=data, headers=headers)
         response.raise_for_status()  # Lanza excepción si status != 200
-        print(response)
+        
         # Retornar la respuesta del servicio externo
         return jsonify(response.json())
 

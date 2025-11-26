@@ -79,7 +79,7 @@
             const submitBtn = document.getElementById('almarte-sinpe-submit-btn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Validando...';
-            
+
             
             fetch(SINPE_URL, {
                 method: 'POST',
@@ -89,8 +89,7 @@
                 body: JSON.stringify({
                     nreferencia: reference,
                     ntelefono: phone,
-                    monto: amount,
-                    appointmentData: localStorage.getItem('appointmentData') || '{}'
+                    monto: amount
                 })
             })
             .then(response => response.json())
