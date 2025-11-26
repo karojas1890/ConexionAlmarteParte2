@@ -98,7 +98,7 @@
                 if (data.valido) {
                     const montoSinpe = parseFloat(data.registro.monto);
 
-                 if (montoSinpe !== selectedPrice) {
+                 if (montoSinpe.toFixed(2) !== precioCita.toFixed(2)) {
                   almarte_showError(
                        'almarte-sinpe-amount',
                        `El monto del SINPE (₡${montoSinpe}) no coincide con el precio de la cita (₡${selectedPrice}).`
